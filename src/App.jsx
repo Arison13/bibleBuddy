@@ -84,19 +84,13 @@ export const LoadingDots = ({ className }) => (
 );
 
 function App() {
-  const authToken = "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";
-
-  const thread_id = "thread_jGBQPJF9uxFW6Etoz5DPejSl";
+  const authToken = import.meta.env.VITE_OPENAI_API_KEY;
   // const assistant_id = "asst_QtKt618WqgeJ4FkmF9KnpqPa";
 
-  const openai = new OpenAI({
-    apiKey: authToken,
-    dangerouslyAllowBrowser: true,
-  });
   const [threadId, setThreadId] = useState("");
   const [messages, setMessages] = useState([]);
   const [runRefetch, setRunRefetch] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isMobile] = useState(window.innerWidth <= 768);
 
   const getMessagesByThread = async (thread) => {
     console.log("here is thread", thread);
@@ -114,38 +108,6 @@ function App() {
     setMessages(res.data.data.reverse());
     setRunRefetch(false);
   };
-
-  const handleCreateNewThread = async () => {
-    //needs to clear out the state and have a form to change instructions of the assistant or create new assistant if needed
-    const newThread = await openai.beta.threads.create();
-
-    //on first load we need to ask user if they wanna keep going or start new thread...
-    console.log("here empty", newThread.id);
-
-    setThreadId(newThread.id);
-    localStorage.setItem("last_thread", newThread.id);
-    getMessagesByThread(newThread);
-  };
-
-  // useEffect(() => {
-  //   const savedThread = localStorage.getItem("last_thread");
-  //   if (savedThread) {
-  //     setThreadId(savedThread);
-  //     getMessagesByThread(savedThread);
-  //   } else {
-  //     handleCreateNewThread();
-  //   }
-  // }, []);
-
-  console.log("runRefetch val:", runRefetch);
-
-  // useEffect(() => {
-  //   if (runRefetch) {
-  //     setTimeout(() => {
-  //       getMessagesByThread(threadId);
-  //     }, 4000);
-  //   }
-  // }, [runRefetch]);
 
   if (runRefetch) {
     setTimeout(() => {
@@ -186,11 +148,11 @@ export default App;
     2. Change icon for assitant and User messages - done
     3. fix width and styles for messages - done
     4. Add/Check logic used to send request to assistant - DONE
-    5. Add in refresh (Refresh works but if the message is long it wont update on time)
-    5. Make new thread everytime - 1/2 DONE
-    7. Add welcome modal:https://github.com/reactjs/react-modal and gpt 
-    8. Add "loading" state when message is sending
-    9. Fix Loading Dots for when receiving the message.
+    5. Add in refresh (Refresh works but if the message is long it wont update on time) -DONE
+    5. Make new thread everytime - DONE
+    7. Add welcome modal:https://github.com/reactjs/react-modal and gpt -DONE
+    8. Add "loading" state when message is sending - 1/2
+    9. Fix Loading Dots for when receiving the message. 1/2
 
   TO DO after MVP:
     1. Figure out a way to keep the past threads saved 
