@@ -10,7 +10,7 @@ export const WelcomeModal = ({
   getMessagesByThread,
 }) => {
   const [modalIsOpen, setModalIsOpen] = useState(true);
-  const authToken = "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";
+  const authToken = import.meta.env.VITE_OPENAI_API_KEY;
 
   const openai = new OpenAI({
     apiKey: authToken,
