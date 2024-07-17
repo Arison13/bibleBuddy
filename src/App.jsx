@@ -93,7 +93,7 @@ function App() {
   const [isMobile] = useState(window.innerWidth <= 768);
 
   const getMessagesByThread = async (thread) => {
-    console.log("here is thread", thread);
+    // console.log("here is thread", thread);
     const res = await axios.get(
       `https://api.openai.com/v1/threads/${thread}/messages`,
       {
@@ -104,7 +104,7 @@ function App() {
         },
       }
     );
-    console.log(res.data.data, res.data.data.length);
+    // console.log(res.data.data, res.data.data.length);
     setMessages(res.data.data.reverse());
     setRunRefetch(false);
   };
