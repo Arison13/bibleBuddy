@@ -34,7 +34,6 @@ export const WelcomeModal = ({
         },
       }
     );
-    console.log("here", res);
   };
   //old thread: thread_TtZtVgtm7e4uMmcQnFX1F3ji
 
@@ -55,7 +54,6 @@ export const WelcomeModal = ({
 
     //creating new thread
     const newThread = await openai.beta.threads.create();
-    console.log("here empty", newThread);
 
     localStorage.setItem("last_thread", newThread.id);
 
@@ -64,7 +62,7 @@ export const WelcomeModal = ({
     // if(localStorage.getItem("last_thread") !== '' || localStorage.getItem("last_thread") !== null) {
     //   //handle more than 1 thread?
     // }
-    console.log("done");
+
     closeModal();
   };
 
@@ -75,10 +73,8 @@ export const WelcomeModal = ({
   */
   const resumeThread = async () => {
     const savedThread = localStorage.getItem("last_thread");
-    console.log("here is saved thread", savedThread);
     if (savedThread) {
       setThreadId(savedThread);
-      console.log("running getMessage");
       getMessagesByThread(savedThread);
       closeModal();
     } else {
@@ -86,9 +82,7 @@ export const WelcomeModal = ({
     }
   };
 
-  const handleCreateNewThread = () => {
-    console.log("creating new thread");
-  };
+  const handleCreateNewThread = () => {};
 
   const customStyles = {
     content: {

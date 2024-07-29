@@ -24,7 +24,6 @@ export const InputBar = ({ thread_id, setRunRefetch, getMessagesByThread }) => {
       assistant_id: "asst_XBERweQgC8KvDGvop8DQ2QtB",
     });
 
-    console.log(run);
     getMessagesByThread(thread_id);
     setRunRefetch(true);
   };
