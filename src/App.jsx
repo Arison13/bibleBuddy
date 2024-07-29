@@ -1,11 +1,8 @@
 import "./App.css";
 import axios from "axios";
-import OpenAI from "openai";
 import { useEffect, useState } from "react";
 import Navbar from "./components/navigation/navbar";
-import Sidebar from "./components/navigation/sidebar";
 import Messages from "./components/conversation/messages";
-// import LoadingDots from "./components/helpers/loadingDots";
 import styled, { keyframes } from "styled-components";
 import { WelcomeModal } from "./components/welcomeModal/welcomeModal";
 
@@ -93,7 +90,6 @@ function App() {
   const [isMobile] = useState(window.innerWidth <= 768);
 
   const getMessagesByThread = async (thread) => {
-    // console.log("here is thread", thread);
     const res = await axios.get(
       `https://api.openai.com/v1/threads/${thread}/messages`,
       {
@@ -104,7 +100,6 @@ function App() {
         },
       }
     );
-    // console.log(res.data.data, res.data.data.length);
     setMessages(res.data.data.reverse());
     setRunRefetch(false);
   };
